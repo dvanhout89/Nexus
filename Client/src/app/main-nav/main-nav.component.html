@@ -1,0 +1,24 @@
+<style>
+    .spacer {
+        flex: 1 1 auto;
+    }
+
+    img {
+        height: 48px;
+        margin-right: 16px;
+    }
+
+    a {
+        margin-left: 25px;
+    }
+</style>
+<mat-toolbar color="">
+    <img src="../../assets/images/logo.png" alt="logo">
+    <p>Nexus Gaming</p>
+    <span class="spacer"></span>
+    <a mat-button [routerLink]="['/']">Home</a>
+    <a mat-button [routerLink]="['/link2']">PC Builder</a>
+    <a mat-button [routerLink]="['/link3']">Build Guides</a>
+    <a mat-button [routerLink]="['/link4']">FAQ</a>
+    
+</mat-toolbar>
