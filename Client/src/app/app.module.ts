@@ -20,14 +20,24 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AngularMaterialModule } from './components/shared/angular-material/angular-material.module';
 import { EstimatesComponent } from './estimates/estimates.component';
 import { InvoicesComponent } from './invoices/invoices.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CustomersComponent } from './customers/customers.component';
+import { PcBuilderComponent } from './pc-builder/pc-builder.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SideNavComponent,
+    DashboardComponent,
+    CustomersComponent,
     ToolbarComponent,
     EstimatesComponent,
-    InvoicesComponent
+    InvoicesComponent,
+    PcBuilderComponent,
+    UserListComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
