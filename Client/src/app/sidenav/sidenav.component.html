@@ -1,52 +1,85 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(!!(isHandset$ | async) ? 'over' : 'side')" [opened]="(!!(isHandset$ | async) === false)">
-    
-      <img src="assets/images/logo.png" class="logo" alt="Brand Logo">
-      <h1>Nexus</h1>
-      <p>The Center of your gaming universe!</p>
-    
+
+    <div class="sidenav-header">
+      <img src="assets/images/logo.png" class="sidenav-header-logo" alt="Nexus Logo">
+      <h1 class="sidenav-header-company">Nexus</h1>
+      <p class="sidenav-header-slogan">The Center of your gaming universe!</p>
+    </div>
     <mat-divider></mat-divider>
     <mat-nav-list class="nav-list">
-      
       <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active-link">
         <mat-icon style="display: inline-block; vertical-align: middle;">dashboard</mat-icon>
-        <span class="list-item-text" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Dashboard</span>
+        <span class="list-item-text"
+          style="display: inline-block; margin-left: 5px; vertical-align: middle;">Dashboard</span>
+      </a>
+      <a mat-list-item [routerLink]="['/users']" routerLinkActive="active-link">
+        <mat-icon style="display: inline-block; vertical-align: middle;">people</mat-icon>
+        <span class="list-item-text"
+          style="display: inline-block; margin-left: 5px; vertical-align: middle;">Users</span>
       </a>
       <a mat-list-item [routerLink]="['/customers']" routerLinkActive="active-link">
         <mat-icon style="display: inline-block; vertical-align: middle;">people</mat-icon>
-        <span class="list-item-text" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Customers</span>
+        <span class="list-item-text"
+          style="display: inline-block; margin-left: 5px; vertical-align: middle;">Customers</span>
       </a>
       <a mat-list-item [routerLink]="['/products']" routerLinkActive="active-link">
         <mat-icon style="display: inline-block; vertical-align: middle;">shopping_cart</mat-icon>
-        <span class="list-item-text" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Products</span>
+        <span class="list-item-text"
+          style="display: inline-block; margin-left: 5px; vertical-align: middle;">Products</span>
       </a>
-      
+
       <a mat-list-item [routerLink]="['/estimates']" routerLinkActive="active-link">
         <mat-icon style="display: inline-block; vertical-align: middle;">receipt_long</mat-icon>
-        <span class="list-item-text" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Estimates</span>
+        <span class="list-item-text"
+          style="display: inline-block; margin-left: 5px; vertical-align: middle;">Estimates</span>
       </a>
       <a mat-list-item [routerLink]="['/invoices']" routerLinkActive="active-link">
         <mat-icon style="display: inline-block; vertical-align: middle;">receipt</mat-icon>
-        <span class="list-item-text" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Invoices</span>
+        <span class="list-item-text"
+          style="display: inline-block; margin-left: 5px; vertical-align: middle;">Invoices</span>
       </a>
-      
+
     </mat-nav-list>
+    <span class="spacer"></span>
     <mat-divider></mat-divider>
-    
-</mat-sidenav> 
+
+    <mat-nav-list class="nav-list">
+      <a mat-list-item [routerLink]="['/pc-builder']" routerLinkActive="active-link">
+        <mat-icon style="display: inline-block; vertical-align: middle;">build</mat-icon>
+        <span class="list-item-text" style="display: inline-block; margin-left: 5px; vertical-align: middle;">Pc
+          Builder</span>
+      </a>
+    </mat-nav-list>
+
+  </mat-sidenav>
 
   <mat-sidenav-content>
     <mat-toolbar class="toolbar">
       <button type="button" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon [ngStyle]="{'color':'black'}">menu</mat-icon>
       </button>
-      <h1>Welcome to Nexus</h1>
+      <div class="toolbar-spacer"></div>
+      <div class="toolbar-user">
+        <mat-icon class="toolbar-avatar">account_circle</mat-icon>
+        <span class="toolbar-username">Username</span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item><mat-icon>account_circle</mat-icon>Account</button>
+          <button mat-menu-item><mat-icon>settings</mat-icon>Settings</button>
+          <button mat-menu-item><mat-icon>help_outline</mat-icon>Help</button>
+          <button mat-menu-item><mat-icon>exit_to_app</mat-icon>Logout</button>
+        </mat-menu>
+      </div>
     </mat-toolbar>
+    
+
 
     <router-outlet></router-outlet>
 
   </mat-sidenav-content>
 
 </mat-sidenav-container>
-
