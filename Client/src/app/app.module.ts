@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,14 @@ import { CustomersComponent } from './customers/customers.component';
 import { PcBuilderComponent } from './pc-builder/pc-builder.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UsersComponent } from './users/users.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AddProductComponent } from './components/add-product/add-product.component';
+import { AddCustomerComponent } from './components/add-customer/add-customer.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
+import { ProductsListComponent } from './components/products-list/products-list.component';
+import { CustomersListComponent } from './components/customers-list/customers-list.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +46,17 @@ import { UsersComponent } from './users/users.component';
     InvoicesComponent,
     PcBuilderComponent,
     UserListComponent,
-    UsersComponent
+    UsersComponent,
+    UserFormComponent,
+    AddProductComponent,
+    AddCustomerComponent,
+    ProductDetailsComponent,
+    CustomerDetailsComponent,
+    ProductsListComponent,
+    CustomersListComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -53,6 +70,7 @@ import { UsersComponent } from './users/users.component';
     MatMenuModule,
     MatSidenavModule,
     MatCheckboxModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
