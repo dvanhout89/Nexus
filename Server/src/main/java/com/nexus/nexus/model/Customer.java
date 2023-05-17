@@ -1,6 +1,8 @@
-package com.nexus.nexus.spring.jpa.postgresql.model;
+package com.nexus.nexus.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+//import javax.persistence.*;
 
 @Entity
 @Table(name = "customers")
@@ -18,6 +20,9 @@ public class Customer {
 
     @Column(name = "published")
     private boolean published;
+    //TODO:
+    //  First Name,Last Name, Email Address, Profile Picture, Billing Information, Delivery Address, Status
+
 
     public Customer() {
 
@@ -59,7 +64,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
+        return "Customer: [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
     }
 
 }

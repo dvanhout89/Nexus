@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomersComponent } from './customers/customers.component';
-//import { ProductsComponent } from './products/products.component';
+import { ProductsComponent } from './products/products.component';
 import { EstimatesComponent } from './estimates/estimates.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { PcBuilderComponent } from './pc-builder/pc-builder.component';
-import { UsersComponent } from './users/users.component';
+
 
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
@@ -19,11 +19,11 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'customers', component: CustomersComponent },
-  //{ path: 'products', component: ProductsComponent },
+  { path: 'products', component: ProductsComponent },
+  
   { path: 'estimates', component: EstimatesComponent },
   { path: 'invoices', component: InvoicesComponent },
   { path: 'pc-builder', component: PcBuilderComponent },
-  { path: 'users', component: UsersComponent },
 
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   { path: 'products', component: ProductsListComponent },

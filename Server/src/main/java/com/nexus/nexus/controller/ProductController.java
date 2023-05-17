@@ -1,4 +1,4 @@
-package com.nexus.nexus.spring.jpa.postgresql.controller;
+package com.nexus.nexus.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nexus.nexus.spring.jpa.postgresql.model.Product;
-import com.nexus.nexus.spring.jpa.postgresql.repository.ProductRepository;
+import com.nexus.nexus.model.Product;
+import com.nexus.nexus.repository.ProductRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController

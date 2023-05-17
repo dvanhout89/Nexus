@@ -28,11 +28,11 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     if (!this.viewMode) {
       this.message = '';
-      this.getCustomer(this.route.snapshot.params['id']);
+      this.getProduct(this.route.snapshot.params['id']);
     }
   }
 
-  getCustomer(id: string): void {
+  getProduct(id: string): void {
     this.productService.get(id).subscribe({
       next: (data) => {
         this.currentProduct = data;
@@ -57,33 +57,33 @@ export class ProductDetailsComponent implements OnInit {
         this.currentProduct.published = status;
         this.message = res.message
           ? res.message
-          : 'The status was updated successfully!';
+          : 'The product status was updated successfully!';
       },
       error: (e) => console.error(e),
     });
   }
 
-  updateCustomer(): void {
+  updateProduct(): void {
     this.message = '';
 
-    this.customerService
-      .update(this.currentCustomer.id, this.currentCustomer)
+    this.productService
+      .update(this.currentProduct.id, this.currentProduct)
       .subscribe({
         next: (res) => {
           console.log(res);
           this.message = res.message
             ? res.message
-            : 'This customer was updated successfully!';
+            : 'This product was updated successfully!';
         },
         error: (e) => console.error(e),
       });
   }
 
-  deleteCustomer(): void {
-    this.customerService.delete(this.currentCustomer.id).subscribe({
+  deleteProduct(): void {
+    this.productService.delete(this.currentProduct.id).subscribe({
       next: (res) => {
         console.log(res);
-        this.router.navigate(['/customers']);
+        this.router.navigate(['/products']);
       },
       error: (e) => console.error(e),
     });

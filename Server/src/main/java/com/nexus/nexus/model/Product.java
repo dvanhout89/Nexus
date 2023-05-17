@@ -1,6 +1,8 @@
-package com.nexus.nexus.spring.jpa.postgresql.model;
+package com.nexus.nexus.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+//import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
@@ -59,7 +61,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
+        return "Product: [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
     }
 
 }

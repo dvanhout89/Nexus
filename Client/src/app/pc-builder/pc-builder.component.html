@@ -1,1 +1,30 @@
-<p>pc-builder works!</p>
+<mat-toolbar color="secondary">
+  <mat-toolbar-row>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="primary">Save Build</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="dashboard">
+  <div class="container">
+    <mat-grid-list class="list-1" cols="1">
+      <mat-grid-tile class="tile-1">
+        <mat-card style="height: 100%; width: 100%">
+          <mat-card-header>
+            <mat-card-title>PC Builder</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <mat-tab-group>
+              <mat-tab label="PC Case"> PC Case </mat-tab>
+              <mat-tab label="Motherboard"> Motherboard </mat-tab>
+              <mat-tab label="Processor"> Processor </mat-tab>
+              <mat-tab label="Memory"> Memory </mat-tab>
+              <mat-tab label="Graphics Card"> Graphics Card </mat-tab>
+              <mat-tab label="Power Supply"> Power Supply </mat-tab>
+            </mat-tab-group>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>
