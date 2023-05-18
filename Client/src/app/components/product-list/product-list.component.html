@@ -1,0 +1,32 @@
+<!-- src/app/product-list/product-list.component.html -->
+
+<mat-table [dataSource]="products" class="mat-elevation-z8">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{product.id}} </mat-cell>
+    </ng-container>
+  
+    <!-- Other columns... -->
+  
+    <!-- Image Column -->
+    <ng-container matColumnDef="imageUrl">
+      <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+      <mat-cell *matCellDef="let product">
+        <img [src]="product.imageUrl" alt="Product Image" style="width: 50px; height: 50px;">
+      </mat-cell>
+    </ng-container>
+  
+    <!-- Action Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let product">
+        <button mat-button (click)="viewProduct(product.id)">View</button>
+        <button mat-button (click)="editProduct(product.id)">Edit</button>
+        <button mat-button (click)="deleteProduct(product.id)">Delete</button>
+      </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>

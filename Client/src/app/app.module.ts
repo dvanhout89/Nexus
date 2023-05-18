@@ -28,9 +28,9 @@ import { PcBuilderComponent } from './pc-builder/pc-builder.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
-import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductDetailsComponent } from './components/product-detail/product-detail.component';
 import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
-import { ProductsListComponent } from './components/products-list/products-list.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
 import { CustomersListComponent } from './components/customers-list/customers-list.component';
 import { ProductsComponent } from './products/products.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
@@ -38,6 +38,7 @@ import { CategoryListComponent } from './components/category-list/category-list.
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { CartComponent } from './components/cart/cart.component';
+import { ProductEditDialogComponent } from './components/product-edit-dialog/product-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,14 +54,15 @@ import { CartComponent } from './components/cart/cart.component';
     AddCustomerComponent,
     ProductDetailsComponent,
     CustomerDetailsComponent,
-    ProductsListComponent,
+    ProductListComponent,
     CustomersListComponent,
     ProductsComponent,
     OrderDetailComponent,
     CategoryListComponent,
     CategoryDetailComponent,
     OrderListComponent,
-    CartComponent
+    CartComponent,
+    ProductEditDialogComponent
   ],
   imports: [
     HttpClientModule,
