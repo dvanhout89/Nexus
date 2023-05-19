@@ -1,46 +1,50 @@
 package com.nexus.nexus.model;
 
-import jakarta.persistence.*;
 
-//import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(nullable = false)
+    private String name;
 
-    @Column(name = "description")
+    @Column
     private String description;
 
-    @Column(name = "published")
-    private boolean published;
+    @Column(nullable = false)
+    private Double price;
 
-    public Product() {
+    @Column(nullable = false)
+    private Integer quantity;
 
-    }
+    @Column(nullable = false)
+    private String category;
 
-    public Product(String title, String description, boolean published) {
-        this.title = title;
-        this.description = description;
-        this.published = published;
-    }
+    @Column
+    private String imageUrl;
 
-    public long getId() {
+    // Getters and setters
+
+    public Long getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -51,17 +55,35 @@ public class Product {
         this.description = description;
     }
 
-    public boolean isPublished() {
-        return published;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPublished(boolean isPublished) {
-        this.published = isPublished;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Product: [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
+    public Integer getQuantity() {
+        return quantity;
     }
 
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

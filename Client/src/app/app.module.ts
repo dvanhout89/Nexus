@@ -1,3 +1,4 @@
+//Angular Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,25 +11,31 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
+//Navigation Components
 import { SideNavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
+//Global Angular Material Imports
 import { AngularMaterialModule } from './components/shared/angular-material/angular-material.module';
+
+//Page Route Components
 import { EstimatesComponent } from './estimates/estimates.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomersComponent } from './customers/customers.component';
 import { PcBuilderComponent } from './pc-builder/pc-builder.component';
 
-import { HttpClientModule } from '@angular/common/http';
+//Components
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
-import { ProductDetailsComponent } from './components/product-detail/product-detail.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { CustomersListComponent } from './components/customers-list/customers-list.component';
@@ -52,7 +59,7 @@ import { ProductEditDialogComponent } from './components/product-edit-dialog/pro
     PcBuilderComponent,
     AddProductComponent,
     AddCustomerComponent,
-    ProductDetailsComponent,
+    ProductDetailComponent,
     CustomerDetailsComponent,
     ProductListComponent,
     CustomersListComponent,
@@ -79,7 +86,8 @@ import { ProductEditDialogComponent } from './components/product-edit-dialog/pro
     MatMenuModule,
     MatSidenavModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

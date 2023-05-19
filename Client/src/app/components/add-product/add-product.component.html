@@ -1,23 +1,66 @@
-<div>
-    <div class="submit-form">
-        <div *ngIf="!submitted">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" required [(ngModel)]="product.title" name="title" />
-            </div>
+<!-- src/app/add-product/add-product.component.html -->
+<mat-toolbar color="secondary">
+    <mat-toolbar-row>
+      <span class="example-spacer"></span>
+      <!-- <button mat-raised-button color="primary"></button> -->
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="dashboard">
+    <div class="container">
 
-            <div class="form-group">
-                <label for="description">Description</label>
-                <input class="form-control" id="description" required [(ngModel)]="product.description"
-                    name="description" />
-            </div>
+      <mat-grid-list class="list-1" cols="1">
+  
+        <mat-grid-tile class="tile-1">
+          <mat-card style="height: 100%; width: 100%">
+            <mat-card-header>
+              <mat-card-title>New Product</mat-card-title>
+              </mat-card-header>
+  
+            <mat-card-content>
+                <div class="form-container">
+                    <div class="form-wrapper">
+                        <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="add-product-form">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Name</mat-label>
+                              <input matInput formControlName="name" placeholder="Product Name">
+                            </mat-form-field>
+                          
+                            <mat-form-field appearance="fill">
+                              <mat-label>Description</mat-label>
+                              <textarea matInput formControlName="description" placeholder="Product Description"></textarea>
+                            </mat-form-field>
+                          
+                            <mat-form-field appearance="fill">
+                              <mat-label>Price</mat-label>
+                              <input matInput formControlName="price" placeholder="Product Price" type="number">
+                            </mat-form-field>
+                          
+                            <mat-form-field appearance="fill">
+                              <mat-label>Quantity</mat-label>
+                              <input matInput formControlName="quantity" placeholder="Product Quantity" type="number">
+                            </mat-form-field>
+                          
+                            <mat-form-field appearance="fill">
+                              <mat-label>Category</mat-label>
+                              <input matInput formControlName="category" placeholder="Product Category">
+                            </mat-form-field>
+                          
+                            <mat-form-field appearance="fill">
+                              <mat-label>Image URL</mat-label>
+                              <input matInput formControlName="imageUrl" placeholder="Product Image URL">
+                            </mat-form-field>
+                          
+                            <div class="button-wrapper">
+                                <button mat-raised-button color="primary" type="submit" [disabled]="!productForm.valid">Add Product</button>
+                            </div> 
+                          </form>
+                    </div>
+                </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
 
-            <button (click)="saveProduct()" class="btn btn-success">Submit</button>
-        </div>
-
-        <div *ngIf="submitted">
-            <h4>Product was submitted successfully!</h4>
-            <button class="btn btn-success" (click)="newProduct()">Add</button>
-        </div>
     </div>
-</div>
+  </div>
+  
