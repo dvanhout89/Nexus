@@ -3,39 +3,38 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Customer } from '../models/customer.model';
 
-const baseUrl = 'http://localhost:8080/api/customers';
-
 @Injectable({
   providedIn: 'root',
 })
 export class CustomerService {
+  private apiUrl = 'http://localhost:8080/api/customers'; // API endpoint
+
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(baseUrl);
+  getCustomers(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(this.apiUrl);
   }
 
-  get(id: any): Observable<Customer> {
-    return this.http.get<Customer>(`${baseUrl}/${id}`);
+  getCustomer(id: number): Observable<Customer> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<Customer>(url);
   }
 
-  create(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
+  createCustomer(customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(this.apiUrl, customer);
   }
 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+  updateCustomer(customer: Customer): Observable<Customer> {
+    const url = `${this.apiUrl}/${customer.id}`;
+    return this.http.put<Customer>(url, customer);
   }
 
-  delete(id: any): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
+  deleteCustomer(id: number): Observable<Customer> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<Customer>(url);
   }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
-  }
-
-  findByTitle(title: any): Observable<Customer[]> {
-    return this.http.get<Customer[]>(`${baseUrl}?title=${title}`);
+  addCustomer(customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(this.apiUrl, customer);
   }
 }

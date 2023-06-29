@@ -1,6 +1,9 @@
-export class OrderItem {
-    id?: number;
-    productId?: number;
-    quantity?: number;
-    price?: number;
+import { Order } from './order.model';
+import { Product } from './product.model';
+
+export interface OrderItem {
+  id: number;
+  product: Product;
+  quantity: number;
+  order: Order;
 }

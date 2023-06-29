@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
+import { Category } from '../models/category.model';
+import { CategoryService } from './category.service';
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +13,26 @@ import { Product } from '../models/product.model';
 export class ProductService {
   private apiUrl = 'http://localhost:8080/api/products'; // API endpoint
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private categoryService: CategoryService) { }
+
+  createProduct(product: Product): Observable<Product> {
+    return this.categoryService.getCategory(product.categoryId).pipe(
+      switchMap((category: Category) => {
+        product.category = category;
+        return this.http.post<Product>(this.apiUrl, product);
+      })
+    );
+  }
+
+  updateProduct(product: Product): Observable<Product> {
+    return this.categoryService.getCategory(product.categoryId).pipe(
+      switchMap((category: Category) => {
+        product.category = category;
+        const url = `${this.apiUrl}/${product.id}`;
+        return this.http.put<Product>(url, product);
+      })
+    );
+  }
 
   //Fetch all products from the API
   getProducts(): Observable<Product[]> {
@@ -23,15 +46,15 @@ export class ProductService {
   }
 
   //Send a product to the API for creation
-  createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product);
-  }
+  // createProduct(product: Product): Observable<Product> {
+  //   return this.http.post<Product>(this.apiUrl, product);
+  // }
 
   //Send a product to the API for update
-  updateProduct(product: Product): Observable<Product> {
-    const url = `${this.apiUrl}/${product.id}`;
-    return this.http.put<Product>(url, product);
-  }
+  // updateProduct(product: Product): Observable<Product> {
+  //   const url = `${this.apiUrl}/${product.id}`;
+  //   return this.http.put<Product>(url, product);
+  // }
 
   //Delete a product by its ID using the API
   deleteProduct(id: number): Observable<Product> {
