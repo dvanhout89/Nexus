@@ -7,14 +7,14 @@ import { ProductsComponent } from './products/products.component';
 import { EstimatesComponent } from './estimates/estimates.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { PcBuilderComponent } from './pc-builder/pc-builder.component';
-
-
+//Product
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
-import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
-import { CustomersListComponent } from './components/customers-list/customers-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+//Customer
+import { CustomerListComponent } from './components/customers-list/customers-list.component';
+import { AddCustomerComponent } from './components/add-customer/add-customer.component';
+import { CustomerDetailComponent } from './components/customer-details/customer-details.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -30,9 +30,9 @@ const routes: Routes = [
   { path: 'add-product', component: AddProductComponent },
   //Customer
   { path: '', redirectTo: 'customers', pathMatch: 'full' },
-  { path: 'customers', component: CustomersListComponent },
-  { path: 'customers/:id', component: CustomerDetailsComponent },
-  { path: 'add', component: AddCustomerComponent }
+  { path: 'customers', component: CustomerListComponent },
+  { path: 'customers/:id', component: CustomerDetailComponent },
+  { path: 'add-customer', component: AddCustomerComponent }
 ];
 
 @NgModule({

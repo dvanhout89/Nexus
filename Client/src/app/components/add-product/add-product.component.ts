@@ -1,5 +1,3 @@
-// src/app/add-product/add-product.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,7 +19,10 @@ export class AddProductComponent implements OnInit {
     imageUrl: new FormControl(' '),
   });
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    private productService: ProductService, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -36,7 +37,7 @@ export class AddProductComponent implements OnInit {
         imageUrl: this.productForm.get('imageUrl')?.value || '',
       };
 
-      this.productService.addProduct(newProduct).subscribe(
+      this.productService.createProduct(newProduct).subscribe(
         () => {
           this.router.navigate(['/products']);
         },
@@ -44,6 +45,7 @@ export class AddProductComponent implements OnInit {
           console.error(error);
         }
       );
-    } else {}
+    } else {
+    }
   }
 }

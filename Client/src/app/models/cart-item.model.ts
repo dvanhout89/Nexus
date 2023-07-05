@@ -1,8 +1,17 @@
-import { Product } from "./product.model";
+// import { Product } from "./product.model";
+
+// export interface CartItem {
+//     id: number;
+//     product: Product;
+//     quantity: number;
+//     cart: Cart;
+//   }
+
+import { Product } from './product.model';
 
 export interface CartItem {
-    id: number;
-    product: Product;
-    quantity: number;
-    cart: Cart;
-  }
+  id?: number;
+  product: Product;
+  quantity: number;
+  totalPrice: number;
+}

@@ -1,91 +1,56 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CustomerService } from 'src/app/services/customer.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { Customer } from 'src/app/models/customer.model';
+import { CustomerService } from 'src/app/services/customer.service';
+import { CustomerEditDialogComponent } from '../customer-edit-dialog/customer-edit-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-customer-details',
+  selector: 'app-customer-detail',
   templateUrl: './customer-details.component.html',
   styleUrls: ['./customer-details.component.less'],
 })
-export class CustomerDetailsComponent implements OnInit {
-  @Input() viewMode = false;
-
-  @Input() currentCustomer: Customer = {
-    title: '',
-    description: '',
-    published: false,
-  };
-
-  message = '';
+export class CustomerDetailComponent implements OnInit {
+  customer: Customer | undefined;
 
   constructor(
-    private customerService: CustomerService,
     private route: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    private customerService: CustomerService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    if (!this.viewMode) {
-      this.message = '';
-      this.getCustomer(this.route.snapshot.params['id']);
-    }
-  }
-
-  getCustomer(id: string): void {
-    this.customerService.get(id).subscribe({
-      next: (data) => {
-        this.currentCustomer = data;
-        console.log(data);
-      },
-      error: (e) => console.error(e),
-    });
-  }
-
-  updatePublished(status: boolean): void {
-    const data = {
-      title: this.currentCustomer.title,
-      description: this.currentCustomer.description,
-      published: status,
-    };
-
-    this.message = '';
-
-    this.customerService.update(this.currentCustomer.id, data).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.currentCustomer.published = status;
-        this.message = res.message
-          ? res.message
-          : 'The status was updated successfully!';
-      },
-      error: (e) => console.error(e),
-    });
-  }
-
-  updateCustomer(): void {
-    this.message = '';
-
+    const id = +this.route.snapshot.paramMap.get('id')!;
     this.customerService
-      .update(this.currentCustomer.id, this.currentCustomer)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.message = res.message
-            ? res.message
-            : 'This customer was updated successfully!';
-        },
-        error: (e) => console.error(e),
-      });
+      .getCustomer(id)
+      .subscribe((customer) => (this.customer = customer));
+  }
+
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(CustomerEditDialogComponent, {
+      width: '250px',
+      data: { customer: this.customer },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 
   deleteCustomer(): void {
-    this.customerService.delete(this.currentCustomer.id).subscribe({
-      next: (res) => {
-        console.log(res);
+    if (this.customer && this.customer.id) {
+      this.customerService.deleteCustomer(this.customer.id).subscribe(() => {
         this.router.navigate(['/customers']);
-      },
-      error: (e) => console.error(e),
-    });
+
+        this.snackBar.open('Customer deleted successfully 🗑️👍🏻', '', {
+          duration: 3000, //
+        });
+      });
+    } else {
+      console.error('Customer or customer ID is not defined.');
+    }
   }
 }

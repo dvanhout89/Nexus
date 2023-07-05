@@ -1,35 +1,91 @@
-<div>
-    <div class="submit-form">
-      <div *ngIf="!submitted">
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            required
-            [(ngModel)]="customer.title"
-            name="title"
-          />
-        </div>
-  
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input
-            class="form-control"
-            id="description"
-            required
-            [(ngModel)]="customer.description"
-            name="description"
-          />
-        </div>
-  
-        <button (click)="saveCustomer()" class="btn btn-success">Submit</button>
-      </div>
-  
-      <div *ngIf="submitted">
-        <h4>Customer was submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newCustomer()">Add</button>
-      </div>
-    </div>
+<!-- src/app/add-product/add-product.component.html -->
+<mat-toolbar color="secondary">
+  <mat-toolbar-row>
+    <span class="example-spacer"></span>
+    <!-- <button mat-raised-button color="primary"></button> -->
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="dashboard">
+  <div class="container">
+    <mat-grid-list class="list-1" cols="1">
+      <mat-grid-tile class="tile-1">
+        <mat-card style="height: 100%; width: 100%">
+          <mat-card-header>
+            <mat-card-title>New Customer</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="form-container">
+              <form
+                [formGroup]="customerForm"
+                (ngSubmit)="onSubmit()"
+                class="add-customer-form"
+              >
+                <mat-form-field class="form-filed" appearance="fill">
+                  <mat-label>First Name</mat-label>
+                  <input
+                    matInput
+                    formControlName="firstName"
+                    placeholder="First Name"
+                    type="text"
+                  />
+                </mat-form-field>
+
+                <mat-form-field class="form-filed" appearance="fill">
+                  <mat-label>Last Name</mat-label>
+                  <input
+                    matInput
+                    formControlName="lastName"
+                    placeholder="Last Name"
+                    type="text"
+                  />
+                </mat-form-field>
+
+                <mat-form-field class="form-filed" appearance="fill">
+                  <mat-label>Email</mat-label>
+                  <input
+                    matInput
+                    formControlName="email"
+                    placeholder="Email"
+                    type="email"
+                  />
+                </mat-form-field>
+
+                <mat-form-field class="form-filed" appearance="fill">
+                  <mat-label>Phone Number</mat-label>
+                  <input
+                    matInput
+                    formControlName="phoneNumber"
+                    placeholder="Phone Number"
+                    type="tel"
+                  />
+                </mat-form-field>
+
+                <mat-form-field class="form-filed" appearance="fill">
+                  <mat-label>Address</mat-label>
+                  <input
+                    matInput
+                    formControlName="address"
+                    placeholder="Address"
+                    type="text"
+                  />
+                </mat-form-field>
+
+                <div class="button-wrapper">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    type="submit"
+                    [disabled]="!customerForm.valid"
+                  >
+                    <mat-icon>add_circle_outline</mat-icon>Add Customer
+                  </button>
+                </div>
+              </form>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
   </div>
+</div>

@@ -12,6 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,9 +37,9 @@ import { PcBuilderComponent } from './pc-builder/pc-builder.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
+import { CustomerDetailComponent } from './components/customer-details/customer-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { CustomersListComponent } from './components/customers-list/customers-list.component';
+import { CustomerListComponent } from './components/customers-list/customers-list.component';
 import { ProductsComponent } from './products/products.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
@@ -46,6 +47,7 @@ import { CategoryDetailComponent } from './components/category-detail/category-d
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ProductEditDialogComponent } from './components/product-edit-dialog/product-edit-dialog.component';
+import { CustomerEditDialogComponent } from './components/customer-edit-dialog/customer-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,16 +62,17 @@ import { ProductEditDialogComponent } from './components/product-edit-dialog/pro
     AddProductComponent,
     AddCustomerComponent,
     ProductDetailComponent,
-    CustomerDetailsComponent,
+    CustomerDetailComponent,
     ProductListComponent,
-    CustomersListComponent,
+    CustomerListComponent,
     ProductsComponent,
     OrderDetailComponent,
     CategoryListComponent,
     CategoryDetailComponent,
     OrderListComponent,
     CartComponent,
-    ProductEditDialogComponent
+    ProductEditDialogComponent,
+    CustomerEditDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -87,7 +90,8 @@ import { ProductEditDialogComponent } from './components/product-edit-dialog/pro
     MatSidenavModule,
     MatCheckboxModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

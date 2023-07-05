@@ -1,94 +1,15 @@
-<div *ngIf="viewMode; else editable">
-  <div *ngIf="currentCustomer.id">
-    <h4>Customer</h4>
-    <div>
-      <label><strong>Title:</strong></label> {{ currentCustomer.title }}
-    </div>
-    <div>
-      <label><strong>Description:</strong></label>
-      {{ currentCustomer.description }}
-    </div>
-    <div>
-      <label><strong>Status:</strong></label>
-      {{ currentCustomer.published ? "Published" : "Pending" }}
-    </div>
-
-    <a
-      class="badge badge-warning"
-      routerLink="/customers/{{ currentCustomer.id }}"
-    >
-      Edit
-    </a>
-  </div>
-
-  <div *ngIf="!currentCustomer">
-    <br />
-    <p>Please click on a Customer...</p>
-  </div>
-</div>
-
-<ng-template #editable>
-  <div *ngIf="currentCustomer.id" class="edit-form">
-    <h4>Customer</h4>
-    <form>
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input
-          type="text"
-          class="form-control"
-          id="title"
-          [(ngModel)]="currentCustomer.title"
-          name="title"
-        />
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <input
-          type="text"
-          class="form-control"
-          id="description"
-          [(ngModel)]="currentCustomer.description"
-          name="description"
-        />
-      </div>
-
-      <div class="form-group">
-        <label><strong>Status:</strong></label>
-        {{ currentCustomer.published ? "Published" : "Pending" }}
-      </div>
-    </form>
-
-    <button
-      class="badge badge-primary mr-2"
-      *ngIf="currentCustomer.published"
-      (click)="updatePublished(false)"
-    >
-      UnPublish
-    </button>
-    <button
-      *ngIf="!currentCustomer.published"
-      class="badge badge-primary mr-2"
-      (click)="updatePublished(true)"
-    >
-      Publish
-    </button>
-
-    <button class="badge badge-danger mr-2" (click)="deleteCustomer()">
-      Delete
-    </button>
-
-    <button
-      type="submit"
-      class="badge badge-success mb-2"
-      (click)="updateCustomer()"
-    >
-      Update
-    </button>
-    <p>{{ message }}</p>
-  </div>
-
-  <div *ngIf="!currentCustomer.id">
-    <br />
-    <p>Cannot access this Customer...</p>
-  </div>
-</ng-template>
+<mat-card *ngIf="customer">
+    <mat-card-header>
+      <mat-card-title>"{{customer.id}}"</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p><b>First Name:</b> {{customer.firstName}}</p>
+      <p><b>Last Name:</b> {{customer.lastName}}</p>
+      <p><b>Email:</b> {{customer.email}}</p>
+      <p><b>Phone Number:</b> {{customer.phone}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="openEditDialog()">Edit</button>
+      <button mat-button (click)="deleteCustomer()">Delete</button>
+    </mat-card-actions>
+  </mat-card>
