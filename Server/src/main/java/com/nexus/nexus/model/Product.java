@@ -1,6 +1,4 @@
 package com.nexus.nexus.model;
-
-
 import jakarta.persistence.*;
 
 @Entity
@@ -23,11 +21,13 @@ public class Product {
     @Column(nullable = false)
     private Integer quantity;
 
-    @Column(nullable = false)
-    private String category;
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @Column
     private String imageUrl;
+
+    //private Byte imageUrl; ??
 
     // Getters and setters
 
@@ -71,11 +71,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

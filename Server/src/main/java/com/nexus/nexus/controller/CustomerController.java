@@ -1,122 +1,77 @@
 package com.nexus.nexus.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.nexus.nexus.model.Customer;
 import com.nexus.nexus.repository.CustomerRepository;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8081")
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class CustomerController {
 
-    @Autowired
-    CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
-    @GetMapping("/customers")
-    public ResponseEntity<List<Customer>> getAllCustomers(@RequestParam(required = false) String title) {
-        try {
-            List<Customer> customers = new ArrayList<Customer>();
-
-            if (title == null)
-                customerRepository.findAll().forEach(customers::add);
-            else
-                customerRepository.findByTitleContaining(title).forEach(customers::add);
-
-            if (customers.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(customers, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public CustomerController(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
-    @GetMapping("/customers/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") long id) {
-        Optional<Customer> customerData = customerRepository.findById(id);
-
-        if (customerData.isPresent()) {
-            return new ResponseEntity<>(customerData.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/customers")
+    public List<Customer> getCustomers() {
+        return customerRepository.findAll();
     }
 
     @PostMapping("/customers")
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        try {
-            Customer _customer = customerRepository
-                    .save(new Customer(customer.getTitle(), customer.getDescription(), false));
-            return new ResponseEntity<>(_customer, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public Customer createCustomer(@RequestBody Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    @GetMapping("/customer/{id}")
+    public ResponseEntity<Customer> getCustomer(@PathVariable Long id) {
+        return customerRepository.findById(id)
+            .map(ResponseEntity::ok)
+            .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/customers/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable("id") long id, @RequestBody Customer customer) {
-        Optional<Customer> customerData = customerRepository.findById(id);
+    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customerDetails) {
+        return customerRepository.findById(id)
+            .map(customer -> {
+                customer.setFirstName(customerDetails.getFirstName());
+                customer.setLastName(customerDetails.getLastName());
+                customer.setEmail(customerDetails.getEmail());
+                customer.setPhoneNumber(customerDetails.getPhoneNumber());
+                customer.setAddressDetails(customerDetails.getAddressDetails());
+                Customer updatedCustomer = customerRepository.save(customer);
+                return ResponseEntity.ok(updatedCustomer);
+            }).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
-        if (customerData.isPresent()) {
-            Customer _customer = customerData.get();
-            _customer.setTitle(customer.getTitle());
-            _customer.setDescription(customer.getDescription());
-            _customer.setPublished(customer.isPublished());
-            return new ResponseEntity<>(customerRepository.save(_customer), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @PutMapping("/{id}/account")
+    public ResponseEntity<Customer> updateCustomerAccount(@PathVariable Long id, @RequestBody Customer updatedAccount) {
+        Customer existingCustomer = customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found with id: " + id));
+
+        // Update the account details
+        existingCustomer.setFirstName(updatedAccount.getFirstName());
+        existingCustomer.setLastName(updatedAccount.getLastName());
+        existingCustomer.setEmail(updatedAccount.getEmail());
+        existingCustomer.setPhoneNumber(updatedAccount.getPhoneNumber());
+        existingCustomer.setAddressDetails(updatedAccount.getAddressDetails());
+
+        Customer savedCustomer = customerRepository.save(existingCustomer);
+        return ResponseEntity.ok(savedCustomer);
     }
 
     @DeleteMapping("/customers/{id}")
-    public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") long id) {
-        try {
-            customerRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @DeleteMapping("/customers")
-    public ResponseEntity<HttpStatus> deleteAllCustomers() {
-        try {
-            customerRepository.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/customers/published")
-    public ResponseEntity<List<Customer>> findByPublished() {
-        try {
-            List<Customer> customers = customerRepository.findByPublished(true);
-
-            if (customers.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(customers, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
+        return customerRepository.findById(id)
+            .map(customer -> {
+                customerRepository.delete(customer);
+                return ResponseEntity.ok().build();
+            }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

@@ -1,70 +1,102 @@
+// src/main/java/com/example/demo/model/Customer.java
 package com.nexus.nexus.model;
-
 import jakarta.persistence.*;
 
-//import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
 public class Customer {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "first_name")
+    private String firstName;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "last_name")
+    private String lastName;
 
-    @Column(name = "published")
-    private boolean published;
-    //TODO:
-    //  First Name,Last Name, Email Address, Profile Picture, Billing Information, Delivery Address, Status
+    @Column(name = "email")
+    private String email;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "address_details")
+    private String addressDetails;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Order> orders;
+
+    // Constructors, getters, and setters
 
     public Customer() {
-
     }
 
-    public Customer(String title, String description, boolean published) {
-        this.title = title;
-        this.description = description;
-        this.published = published;
+    public Customer(String firstName, String lastName, String email, String phoneNumber, String addressDetails) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.addressDetails = addressDetails;
     }
 
-    public long getId() {
+    // Getters and setters
+
+    public Long getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getDescription() {
-        return description;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getLastName() {
+        return lastName;
     }
 
-    public boolean isPublished() {
-        return published;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setPublished(boolean isPublished) {
-        this.published = isPublished;
+    public String getEmail() {
+        return email;
     }
 
-    @Override
-    public String toString() {
-        return "Customer: [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
+    public void setEmail(String email) {
+        this.email = email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddressDetails() {
+        return addressDetails;
+    }
+
+    public void setAddressDetails(String addressDetails) {
+        this.addressDetails = addressDetails;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }
