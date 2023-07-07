@@ -16,8 +16,6 @@ public class Cart {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
 
-    // Other cart fields
-
     // Constructors, getters, and setters
 
     public Cart() {
@@ -51,6 +49,4 @@ public class Cart {
     public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
     }
-
-    // Other getters and setters for cart fields
 }
