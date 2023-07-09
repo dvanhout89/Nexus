@@ -1,7 +1,7 @@
 package com.nexus.nexus.controller;
 
 import com.nexus.nexus.model.Order;
-import com.nexus.nexus.model.OrderItem;
+//import com.nexus.nexus.model.OrderItem;
 import com.nexus.nexus.repository.OrderItemRepository;
 import com.nexus.nexus.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,55 +72,55 @@ public class OrderController {
     }
 
     // Add an order item to an order
-    @PostMapping("/{orderId}/items")
-    public ResponseEntity<OrderItem> addOrderItem(@PathVariable Long orderId, @RequestBody OrderItem orderItem) {
-        Optional<Order> optionalOrder = orderRepository.findById(orderId);
-        if (optionalOrder.isPresent()) {
-            Order order = optionalOrder.get();
-            orderItem.setOrder(order);
-            OrderItem savedOrderItem = orderItemRepository.save(orderItem);
-            return ResponseEntity.ok(savedOrderItem);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @PostMapping("/{orderId}/items")
+//    public ResponseEntity<OrderItem> addOrderItem(@PathVariable Long orderId, @RequestBody OrderItem orderItem) {
+//        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+//        if (optionalOrder.isPresent()) {
+//            Order order = optionalOrder.get();
+//            orderItem.setOrder(order);
+//            OrderItem savedOrderItem = orderItemRepository.save(orderItem);
+//            return ResponseEntity.ok(savedOrderItem);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     // Update an order item
-    @PutMapping("/{orderId}/items/{itemId}")
-    public ResponseEntity<OrderItem> updateOrderItem(@PathVariable Long orderId, @PathVariable Long itemId, @RequestBody OrderItem updatedOrderItem) {
-        Optional<Order> optionalOrder = orderRepository.findById(orderId);
-        if (optionalOrder.isPresent()) {
-            Optional<OrderItem> optionalOrderItem = orderItemRepository.findById(itemId);
-            if (optionalOrderItem.isPresent()) {
-                OrderItem existingOrderItem = optionalOrderItem.get();
-                existingOrderItem.setProduct(updatedOrderItem.getProduct());
-                existingOrderItem.setQuantity(updatedOrderItem.getQuantity());
-
-                OrderItem savedOrderItem = orderItemRepository.save(existingOrderItem);
-                return ResponseEntity.ok(savedOrderItem);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @PutMapping("/{orderId}/items/{itemId}")
+//    public ResponseEntity<OrderItem> updateOrderItem(@PathVariable Long orderId, @PathVariable Long itemId, @RequestBody OrderItem updatedOrderItem) {
+//        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+//        if (optionalOrder.isPresent()) {
+//            Optional<OrderItem> optionalOrderItem = orderItemRepository.findById(itemId);
+//            if (optionalOrderItem.isPresent()) {
+//                OrderItem existingOrderItem = optionalOrderItem.get();
+//                existingOrderItem.setProduct(updatedOrderItem.getProduct());
+//                existingOrderItem.setQuantity(updatedOrderItem.getQuantity());
+//
+//                OrderItem savedOrderItem = orderItemRepository.save(existingOrderItem);
+//                return ResponseEntity.ok(savedOrderItem);
+//            } else {
+//                return ResponseEntity.notFound().build();
+//            }
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     // Delete an order item
-    @DeleteMapping("/{orderId}/items/{itemId}")
-    public ResponseEntity<Void> deleteOrderItem(@PathVariable Long orderId, @PathVariable Long itemId) {
-        Optional<Order> optionalOrder = orderRepository.findById(orderId);
-        if (optionalOrder.isPresent()) {
-            Optional<OrderItem> optionalOrderItem = orderItemRepository.findById(itemId);
-            if (optionalOrderItem.isPresent()) {
-                OrderItem orderItem = optionalOrderItem.get();
-                orderItemRepository.delete(orderItem);
-                return ResponseEntity.noContent().build();
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @DeleteMapping("/{orderId}/items/{itemId}")
+//    public ResponseEntity<Void> deleteOrderItem(@PathVariable Long orderId, @PathVariable Long itemId) {
+//        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+//        if (optionalOrder.isPresent()) {
+//            Optional<OrderItem> optionalOrderItem = orderItemRepository.findById(itemId);
+//            if (optionalOrderItem.isPresent()) {
+//                OrderItem orderItem = optionalOrderItem.get();
+//                orderItemRepository.delete(orderItem);
+//                return ResponseEntity.noContent().build();
+//            } else {
+//                return ResponseEntity.notFound().build();
+//            }
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 }
