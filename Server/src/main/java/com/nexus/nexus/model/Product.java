@@ -21,8 +21,8 @@ public class Product {
     @Column(nullable = false)
     private Integer quantity;
 
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+//    @JoinColumn(name = "category_id", nullable = false)
+//    private Category category;
 
     @Column
     private String imageUrl;
@@ -71,13 +71,13 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Category getCategory() {
-        return category;
-    }
+//    public Category getCategory() {
+//        return category;
+//    }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
 
     public String getImageUrl() {
         return imageUrl;

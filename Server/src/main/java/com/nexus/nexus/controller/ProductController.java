@@ -43,7 +43,7 @@ public class ProductController {
                     product.setDescription(productDetails.getDescription());
                     product.setPrice(productDetails.getPrice());
                     product.setQuantity(productDetails.getQuantity());
-                    productDetails.setCategory(product.getCategory());
+//                    productDetails.setCategory(product.getCategory());
                     product.setImageUrl(productDetails.getImageUrl());
                     Product updatedProduct = productRepository.save(product);
                     return ResponseEntity.ok(updatedProduct);
